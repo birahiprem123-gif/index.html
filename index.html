@@ -1172,6 +1172,13 @@ function runSplash(){
       if(sessionOk){
         try{sessionStorage.setItem('nexus_logged_in','1');}catch(e){}
         document.getElementById('mainApp').style.display='flex';
+        try{
+          applyUserBranding(
+            sessionStorage.getItem('nexus_user_name'),
+            sessionStorage.getItem('nexus_user_branch'),
+            sessionStorage.getItem('nexus_user_role')
+          );
+        }catch(e){}
         showHome();
       } else {
         document.getElementById('loginScreen').style.display='flex';
@@ -1200,29 +1207,82 @@ function tick(){
 setInterval(tick,1000);
 
 /* LOGIN */
+// Paste your deployed Google Apps Script Web App URL here (ends in /exec)
+const GAS_LOGIN_URL = 'https://script.google.com/macros/s/AKfycbzYF9SKwuSMJmpnNyEd72PCiUK3kMfLhF25unUsG1H0SMT1tIipK-b47YysLnfb4Y25/exec';
+
 function toggleEye(){const i=document.getElementById('pwI'),b=document.getElementById('eyeB');i.type=i.type==='password'?'text':'password';b.textContent=i.type==='password'?'👁':'🙈';}
-function doLogin(){
+
+function setLoginError(msg){
+  const e=document.getElementById('lerr');
+  e.textContent = msg || 'Incorrect username or password';
+  e.style.display='block';e.style.animation='none';
+  requestAnimationFrame(()=>e.style.animation='shake .3s ease');
+  document.getElementById('pwI').value='';
+  notify(msg || 'Incorrect username or password','warn');
+}
+
+function applyUserBranding(name, branch, role){
+  try{
+    sessionStorage.setItem('nexus_user_name', name||'');
+    sessionStorage.setItem('nexus_user_branch', branch||'');
+    sessionStorage.setItem('nexus_user_role', role||'User');
+  }catch(e){}
+  const avatar=document.querySelector('.nx-th-avatar');
+  if(avatar) avatar.textContent=(name||'U').trim().charAt(0).toUpperCase();
+  const adminBtn=document.getElementById('adminBtn');
+  if(adminBtn) adminBtn.style.display=(String(role).toLowerCase()==='admin')?'':'none';
+  let branchTag=document.getElementById('userBranchTag');
+  if(!branchTag){
+    const tbRight=document.querySelector('.tb-right');
+    if(tbRight){
+      branchTag=document.createElement('div');
+      branchTag.id='userBranchTag';
+      branchTag.style.cssText='font-size:11px;color:var(--pbi-text2);padding:4px 10px;border:1px solid var(--pbi-border);border-radius:14px;white-space:nowrap;';
+      tbRight.insertBefore(branchTag, tbRight.firstChild);
+    }
+  }
+  if(branchTag) branchTag.textContent=(name?name+' · ':'')+(branch||'');
+}
+
+async function doLogin(){
   const u=document.getElementById('userI').value.trim();
   const p=document.getElementById('pwI').value;
   const remember=document.getElementById('rememberMe').checked;
-  if(u==='Prem' && p==='Prem@#'){
-    try{
-      sessionStorage.setItem('nexus_logged_in','1');
-      if(remember){
-        localStorage.setItem('nexus_persistent_login','1');
-        localStorage.setItem('nexus_remember_user',u);
-      }else{
-        localStorage.removeItem('nexus_persistent_login');
-        localStorage.removeItem('nexus_remember_user');
-      }
-    }catch(e){}
-    const ls=document.getElementById('loginScreen');ls.style.transition='opacity .3s';ls.style.opacity='0';
-    setTimeout(()=>{ls.style.display='none';const a=document.getElementById('mainApp');a.style.display='flex';a.style.flexDirection='column';updateStats();updateCardCounts();notify('Welcome back, Prem','info');},300);
-  }else{
-    const e=document.getElementById('lerr');e.style.display='block';e.style.animation='none';
-    requestAnimationFrame(()=>e.style.animation='shake .3s ease');
-    document.getElementById('pwI').value='';
-    notify('Incorrect username or password','warn');
+  if(!u || !p){ setLoginError('Username ra password dubai halnus'); return; }
+
+  const btn=document.querySelector('.lbtn');
+  const originalLabel=btn?btn.textContent:'';
+  if(btn){ btn.disabled=true; btn.textContent='Signing in…'; }
+
+  try{
+    if(!GAS_LOGIN_URL || GAS_LOGIN_URL.includes('PASTE_YOUR')){
+      throw new Error('Login server URL setup vayeko xaina (GAS_LOGIN_URL). Admin lai bhannus.');
+    }
+    const url = GAS_LOGIN_URL + '?action=login&username=' + encodeURIComponent(u) + '&password=' + encodeURIComponent(p);
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if(data.success){
+      try{
+        sessionStorage.setItem('nexus_logged_in','1');
+        if(remember){
+          localStorage.setItem('nexus_persistent_login','1');
+          localStorage.setItem('nexus_remember_user',u);
+        }else{
+          localStorage.removeItem('nexus_persistent_login');
+          localStorage.removeItem('nexus_remember_user');
+        }
+      }catch(e){}
+      applyUserBranding(data.name, data.branch, data.role);
+      const ls=document.getElementById('loginScreen');ls.style.transition='opacity .3s';ls.style.opacity='0';
+      setTimeout(()=>{ls.style.display='none';const a=document.getElementById('mainApp');a.style.display='flex';a.style.flexDirection='column';updateStats();updateCardCounts();notify('Welcome back, '+(data.name||u),'info');},300);
+    } else {
+      setLoginError(data.message || 'Incorrect username or password');
+    }
+  }catch(err){
+    setLoginError(err.message || 'Login server sanga connect huna sakena. Internet check garnus.');
+  } finally {
+    if(btn){ btn.disabled=false; btn.textContent=originalLabel||'→ Sign in'; }
   }
 }
 function forgotPassword(){
@@ -1235,7 +1295,11 @@ function contactAdmin(){
   notify('New here? Please contact your system administrator to get an account set up.','info');
 }
 function doLogout(){
-  try{sessionStorage.removeItem(SKEY);sessionStorage.removeItem('nexus_logged_in');localStorage.removeItem('nexus_persistent_login');}catch(e){}
+  try{
+    sessionStorage.removeItem(SKEY);sessionStorage.removeItem('nexus_logged_in');localStorage.removeItem('nexus_persistent_login');
+    sessionStorage.removeItem('nexus_user_name');sessionStorage.removeItem('nexus_user_branch');sessionStorage.removeItem('nexus_user_role');
+  }catch(e){}
+  const branchTag=document.getElementById('userBranchTag'); if(branchTag) branchTag.remove();
   Object.assign(cache,emptyCache());currentDash=null;
   document.getElementById('pwI').value='';document.getElementById('lerr').style.display='none';
   try{
