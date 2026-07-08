@@ -1303,11 +1303,22 @@ function applyUserBranding(name, branch, role){
 
   // Dynamic branch name everywhere else in the UI (was hardcoded to Shuklagandaki before)
   const branchDisplay = branch || 'your branch';
-  const homeBranchEl = document.getElementById('home-branch-name');
-  if(homeBranchEl) homeBranchEl.textContent = branchDisplay;
   const tbVerEl = document.getElementById('tbVer');
   if(tbVerEl) tbVerEl.textContent = branchDisplay + ' Branch Reporting';
   document.querySelectorAll('.dcard-branch').forEach(function(el){ el.textContent = branchDisplay; });
+
+  // Time-aware greeting + greet by first name (not branch)
+  const homeGreetingEl = document.getElementById('home-greeting');
+  if(homeGreetingEl){
+    const hr = new Date().getHours();
+    const greetWord = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : hr < 20 ? 'Good evening' : 'Good evening';
+    homeGreetingEl.textContent = greetWord;
+  }
+  const homeBranchEl = document.getElementById('home-branch-name');
+  if(homeBranchEl){
+    const firstName = (name||'').trim().split(/\s+/)[0] || '';
+    homeBranchEl.textContent = firstName ? (firstName + ' ji') : 'there';
+  }
 }
 
 async function doLogin(){
