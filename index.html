@@ -9,532 +9,372 @@
 <meta name="apple-mobile-web-app-title" content="NEXUS">
 <meta name="theme-color" content="#0f2749">
 <meta name="format-detection" content="telephone=no">
-<meta name="description" content="NEXUS - Data Intelligence Platform for Branch Reporting and Analytics">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f2749'/%3E%3Ctext x='50' y='66' font-size='60' font-weight='700' fill='%23fff' text-anchor='middle' font-family='Arial'%3ENX%3C/text%3E%3C/svg%3E">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f2749'/%3E%3Ctext x='50' y='66' font-size='60' font-weight='700' fill='%23fff' text-anchor='middle' font-family='Arial'%3ENX%3C/text%3E%3C/svg%3E">
+<meta name="description" content="NEXUS - Data Intelligence Platform">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f2749'/%3E%3Ctext x='50' y='66' font-size='60' font-weight='700' fill='%23fff' text-anchor='middle'%3ENX%3C/text%3E%3C/svg%3E">
 <title>NEXUS · Data Intelligence Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root{
-  --pbi-bg:#faf9f8;--pbi-surface:#ffffff;--pbi-panel:#f3f2f1;--pbi-panel2:#edebe9;
-  --pbi-border:#e1dfdd;--pbi-border2:#d2d0ce;
-  --pbi-yellow:#f2c811;--pbi-yellow-dk:#d4a90a;
-  --pbi-text:#252423;--pbi-text2:#605e5c;--pbi-text3:#a19f9d;
-  --pbi-blue:#106ebe;--pbi-blue-lt:#deecf9;
-  --pbi-green:#107c10;--pbi-red:#a4262c;--pbi-orange:#ca5010;--pbi-purple:#5c2d91;
-  --pbi-shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
-  --pbi-shadow-md:0 4px 10px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.06);
-  --transition-fast:0.12s;--transition-med:0.25s;
+  --pbi-bg:#faf9f8;--pbi-surface:#ffffff;--pbi-text:#252423;--pbi-text2:#605e5c;--pbi-text3:#a19f9d;
+  --pbi-blue:#106ebe;--pbi-yellow:#f2c811;--pbi-green:#107c10;--pbi-red:#a4262c;
+  --pbi-shadow:0 1px 3px rgba(0,0,0,.08);--transition:0.2s ease;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;overflow:hidden;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif;background:var(--pbi-bg);color:var(--pbi-text);overscroll-behavior:none;}
-*{-webkit-tap-highlight-color:transparent;}
-body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overscroll-behavior-y:none;}
-input,textarea,select{-webkit-user-select:text;user-select:text;}
-button,.dcard,.np,.ebtn,.lout,.adm-btn,#adminBtn{cursor:pointer;-webkit-user-drag:none;}
-::-webkit-scrollbar{width:6px;height:6px;}
-::-webkit-scrollbar-thumb{background:var(--pbi-border2);border-radius:3px;}
-::-webkit-scrollbar-track{background:transparent;}
+html,body{height:100%;overflow:hidden;font-family:'Segoe UI',-apple-system,sans-serif;background:var(--pbi-bg);color:var(--pbi-text);}
+input{font-family:inherit;}button{cursor:pointer;border:none;background:none;}
 
 /* SPLASH */
 #splash{position:fixed;inset:0;z-index:3000;background:var(--pbi-bg);display:flex;align-items:center;justify-content:center;flex-direction:column;}
 .sp-center{display:flex;flex-direction:column;align-items:center;gap:18px;}
-.sp-ring-outer{width:64px;height:64px;border-radius:8px;background:var(--pbi-yellow);display:flex;align-items:center;justify-content:center;box-shadow:var(--pbi-shadow-md);}
-.sp-avatar-frame{width:48px;height:48px;border-radius:6px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;}
-.sp-avatar-img{width:100%;height:100%;object-fit:cover;border-radius:6px;}
-.sp-sys{font-size:11px;font-weight:600;color:var(--pbi-text2);letter-spacing:.04em;text-transform:uppercase;}
-.sp-title{font-size:22px;font-weight:600;color:var(--pbi-text);letter-spacing:-.01em;}
+.sp-ring-outer{width:64px;height:64px;border-radius:8px;background:var(--pbi-yellow);display:flex;align-items:center;justify-content:center;}
+.sp-title{font-size:22px;font-weight:600;color:var(--pbi-text);}
 .sp-sub{font-size:12px;color:var(--pbi-text3);}
-.sp-author{font-size:11px;color:var(--pbi-text3);}
-.sp-progress-wrap{width:260px;display:flex;flex-direction:column;gap:6px;margin-top:6px;}
-.sp-progress-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--pbi-text3);font-weight:600;letter-spacing:.04em;text-transform:uppercase;}
-.sp-track{width:100%;height:4px;background:var(--pbi-panel2);border-radius:2px;overflow:hidden;}
-.sp-fill{height:100%;width:0%;background:var(--pbi-yellow);border-radius:2px;transition:width .25s linear;}
-.sp-msg{font-size:11px;color:var(--pbi-text3);text-align:center;}
+.sp-track{width:260px;height:4px;background:#e1dfdd;border-radius:2px;overflow:hidden;}
+.sp-fill{height:100%;width:0%;background:var(--pbi-yellow);transition:width .25s linear;}
+
+/* QR MODAL */
+.qr-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9000;display:none;align-items:center;justify-content:center;}
+.qr-modal{background:#fff;border-radius:12px;padding:40px;text-align:center;max-width:400px;box-shadow:0 10px 40px rgba(0,0,0,.3);animation:popIn 0.3s ease;}
+.qr-modal h2{font-size:24px;font-weight:700;color:var(--pbi-red);margin-bottom:8px;}
+.qr-modal-subtitle{font-size:14px;color:var(--pbi-text2);margin-bottom:24px;}
+#qrcode{display:flex;justify-content:center;margin:20px 0;}
+#qrcode svg{max-width:280px;height:auto;}
+.qr-modal-footer{font-size:12px;color:var(--pbi-text3);margin-top:20px;padding-top:20px;border-top:1px solid #e1dfdd;}
+.qr-modal-footer p{margin:4px 0;font-weight:600;color:var(--pbi-text);}
+.qr-close-btn{margin-top:20px;padding:10px 24px;background:var(--pbi-red);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;}
+.qr-close-btn:hover{background:#8e1f24;}
+@keyframes popIn{from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);}}
 
 /* LOGIN */
-#loginScreen{position:fixed;inset:0;z-index:2000;display:none;background:#0f2749;overflow:hidden;}
-.login-shell{width:100%;height:100%;display:flex;overflow:auto;}
-.login-left{position:relative;flex:1 1 55%;min-width:0;background:linear-gradient(150deg,#1c3d63 0%,#122c4d 55%,#0a1a30 100%);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:40px;}
-.login-left-content{position:relative;z-index:1;max-width:480px;}
-.login-brand{display:flex;align-items:center;gap:10px;margin-bottom:46px;}
-.login-brand-mark{width:38px;height:38px;border-radius:50%;background:conic-gradient(from 90deg,var(--pbi-yellow),#8a6a10,var(--pbi-yellow));display:flex;align-items:center;justify-content:center;}
-.login-brand-mark::after{content:'';width:16px;height:16px;border-radius:50%;background:#0f2749;}
-.login-brand-text{font-size:11px;font-weight:700;letter-spacing:.08em;line-height:1.5;}
-.login-brand-text b{display:block;font-size:15px;letter-spacing:.02em;color:#fff;}
-.login-headline{font-size:34px;font-weight:700;line-height:1.2;margin-bottom:14px;letter-spacing:-.01em;}
+#loginScreen{position:fixed;inset:0;z-index:2000;display:none;background:#0f2749;}
+.login-shell{width:100%;height:100%;display:flex;}
+.login-left{flex:1;background:linear-gradient(150deg,#1c3d63,#0a1a30);color:#fff;display:flex;flex-direction:column;justify-content:center;padding:40px;}
+.login-headline{font-size:34px;font-weight:700;margin-bottom:14px;}
 .login-headline .accent{color:var(--pbi-yellow);}
-.login-sub{font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:38px;max-width:380px;}
+.login-sub{font-size:13.5px;color:rgba(255,255,255,.65);margin-bottom:38px;}
 .login-features{display:flex;flex-direction:column;gap:18px;}
-.login-feature{display:flex;align-items:flex-start;gap:14px;}
-.login-feature-icon{flex:none;width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;}
-.login-feature-title{font-size:13.5px;font-weight:600;color:#fff;margin-bottom:2px;}
-.login-feature-desc{font-size:11.5px;color:rgba(255,255,255,.55);line-height:1.5;max-width:300px;}
-.login-right{flex:1 1 45%;min-width:340px;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(150deg,#233f5c 0%,#152c48 100%);position:relative;}
-.lcard{position:relative;width:100%;max-width:420px;background:rgba(255,255,255,.06);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:32px;}
-.lav-wrap{position:relative;width:76px;height:76px;margin:0 auto 14px;}
-.lav{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.5);}
-.lav-status{position:absolute;bottom:2px;right:2px;width:15px;height:15px;border-radius:50%;background:var(--pbi-green);border:2px solid #1a3454;}
-.lname{font-size:19px;font-weight:600;color:#fff;margin-bottom:3px;text-align:center;}
-.lrole{font-size:11.5px;color:rgba(255,255,255,.55);margin-bottom:24px;text-align:center;}
-.lfield-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;display:block;}
-.luwrap,.liwrap{width:100%;position:relative;margin-bottom:14px;}
-.lu,.li{width:100%;padding:11px 14px;border:1px solid rgba(255,255,255,.16);border-radius:8px;font-size:13px;font-family:inherit;color:#fff;outline:none;background:rgba(255,255,255,.08);transition:border-color var(--transition-fast);}
+.login-feature{display:flex;gap:14px;}
+.login-feature-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.login-feature-title{font-size:13.5px;font-weight:600;color:#fff;}
+.login-feature-desc{font-size:11.5px;color:rgba(255,255,255,.55);}
+.login-right{flex:1;display:flex;align-items:center;justify-content:center;padding:32px;background:linear-gradient(150deg,#233f5c,#152c48);}
+.lcard{width:100%;max-width:420px;background:rgba(255,255,255,.08);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:32px;}
+.lname{font-size:19px;font-weight:600;color:#fff;text-align:center;margin-bottom:24px;}
+.lfield-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;margin-bottom:6px;display:block;}
+.lu,.li{width:100%;padding:11px 14px;border:1px solid rgba(255,255,255,.16);border-radius:8px;font-size:13px;color:#fff;background:rgba(255,255,255,.08);outline:none;margin-bottom:14px;transition:border-color var(--transition);}
+.lu:focus,.li:focus{border-color:var(--pbi-yellow);box-shadow:0 0 0 1px var(--pbi-yellow);}
 .lu::placeholder,.li::placeholder{color:rgba(255,255,255,.4);}
-.lu:focus,.li:focus{border-color:var(--pbi-yellow);background:rgba(255,255,255,.12);box-shadow:0 0 0 1px var(--pbi-yellow);}
-.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:14px;opacity:.7;padding:4px;filter:grayscale(1) brightness(2);transition:opacity var(--transition-fast);}
-.eye:hover{opacity:1;}
-.login-row{width:100%;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
-.login-remember{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,.7);cursor:pointer;user-select:none;}
-.login-remember input{width:15px;height:15px;accent-color:var(--pbi-yellow);cursor:pointer;}
-.login-forgot{font-size:12px;color:var(--pbi-yellow);text-decoration:none;font-weight:600;background:none;border:none;cursor:pointer;padding:0;transition:text-decoration var(--transition-fast);}
-.login-forgot:hover{text-decoration:underline;}
-.lbtn{width:100%;padding:12px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--pbi-yellow),var(--pbi-yellow-dk));color:#252423;font-weight:700;font-size:13.5px;cursor:pointer;transition:filter var(--transition-fast);}
+.eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:14px;opacity:.7;padding:4px;}
+.liwrap{position:relative;}
+.login-row{display:flex;justify-content:space-between;margin-bottom:18px;font-size:12px;color:rgba(255,255,255,.7);}
+.login-remember{display:flex;align-items:center;gap:7px;}
+.login-forgot{background:none;border:none;color:var(--pbi-yellow);cursor:pointer;font-size:12px;}
+.lbtn{width:100%;padding:12px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--pbi-yellow),#d4a90a);color:#252423;font-weight:700;cursor:pointer;transition:filter var(--transition);margin-bottom:18px;}
 .lbtn:hover{filter:brightness(1.06);}
-.lbtn:active{transform:scale(.99);}
 .lbtn:disabled{opacity:.6;cursor:not-allowed;}
-.lerr{display:none;font-size:11.5px;color:#ff8a8a;margin-top:10px;text-align:center;font-weight:600;}
-.login-or{width:100%;display:flex;align-items:center;gap:12px;margin:18px 0;}
+.lerr{display:none;font-size:11.5px;color:#ff8a8a;text-align:center;margin-bottom:10px;}
+.login-or{display:flex;align-items:center;gap:12px;margin:18px 0;}
 .login-or::before,.login-or::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.15);}
-.login-or span{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.05em;}
-.login-google{width:100%;padding:11px;border:none;border-radius:8px;background:#fff;color:#3c4043;font-weight:600;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background var(--transition-fast);}
-.login-google:hover{background:#f5f5f5;}
-.lcard-foot{font-size:11.5px;color:rgba(255,255,255,.55);margin-top:20px;text-align:center;}
-.lcard-foot a{color:var(--pbi-yellow);text-decoration:none;font-weight:600;cursor:pointer;transition:text-decoration var(--transition-fast);}
-.lcard-foot a:hover{text-decoration:underline;}
-.login-secure{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-size:11px;color:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;gap:6px;z-index:2;}
-@media (max-width:860px){
-  .login-left{display:none;}
-  .login-right{flex:1 1 100%;background:linear-gradient(150deg,#1c3d63 0%,#0a1a30 100%);}
-}
+.login-google{width:100%;padding:11px;border:none;border-radius:8px;background:#fff;color:#3c4043;font-weight:600;cursor:pointer;}
+.lcard-foot{font-size:11.5px;color:rgba(255,255,255,.55);text-align:center;margin-top:10px;}
+.lcard-foot a{color:var(--pbi-yellow);text-decoration:none;cursor:pointer;}
+@media(max-width:860px){.login-left{display:none;}.login-right{flex:1;}}
 
 /* MAIN APP */
 #mainApp{display:none;width:100%;height:100vh;flex-direction:column;}
-.topbar{background:var(--pbi-ribbon);border-bottom:1px solid var(--pbi-border);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.topbar{background:#fff;border-bottom:1px solid #e1dfdd;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
 .tb-logo{display:flex;align-items:center;gap:10px;}
-.tb-logo-mark{width:32px;height:32px;border-radius:4px;background:var(--pbi-yellow);color:#252423;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
-.tb-name{font-size:14px;font-weight:600;color:var(--pbi-text);}
-.tb-ver{font-size:9px;color:var(--pbi-text3);}
-.tb-nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
-.np{display:flex;align-items:center;gap:6px;padding:7px 14px;border:none;background:transparent;border-radius:4px;font-size:12px;font-weight:600;color:var(--pbi-text2);cursor:pointer;transition:var(--transition-fast);}
-.np:hover{background:var(--pbi-panel2);color:var(--pbi-text);}
-.np:focus{outline:2px solid var(--pbi-blue);outline-offset:2px;}
-.np.active{background:var(--pbi-blue-lt);color:var(--pbi-blue);}
-.tb-sep{width:1px;height:22px;background:var(--pbi-border2);margin:0 4px;}
-.tb-right{display:flex;align-items:center;gap:8px;}
-.tb-clock{text-align:right;font-family:'Consolas',monospace;font-size:12px;font-weight:600;color:var(--pbi-text2);}
-.ebtn{padding:6px 12px;border:1px solid var(--pbi-border2);background:var(--pbi-surface);border-radius:4px;font-size:11px;font-weight:600;color:var(--pbi-text2);cursor:pointer;transition:var(--transition-fast);}
-.ebtn:hover{background:var(--pbi-panel2);}
-.ebtn:focus{outline:2px solid var(--pbi-blue);outline-offset:2px;}
-.lout{padding:6px 14px;border:none;background:var(--pbi-red);color:#fff;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;transition:var(--transition-fast);}
-.lout:hover{background:#8e1f24;}
-.lout:focus{outline:2px solid #fff;outline-offset:2px;}
+.tb-logo-mark{width:32px;height:32px;border-radius:4px;background:var(--pbi-yellow);color:#252423;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.tb-name{font-size:14px;font-weight:600;}
+.tb-nav{display:flex;gap:4px;}
+.np{padding:7px 14px;border:none;background:transparent;border-radius:4px;font-size:12px;font-weight:600;color:var(--pbi-text2);cursor:pointer;transition:var(--transition);}
+.np:hover{background:#f3f2f1;}
+.np.active{background:#deecf9;color:var(--pbi-blue);}
+.tb-right{display:flex;gap:8px;align-items:center;}
+.ebtn,.lout{padding:6px 12px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;}
+.ebtn{border:1px solid #d2d0ce;background:#fff;color:var(--pbi-text2);}
+.lout{background:var(--pbi-red);color:#fff;}
 
 /* HOME */
 #homeScreen{flex:1;overflow-y:auto;background:var(--pbi-bg);}
-.home-wrap{max-width:1280px;margin:0 auto;padding:48px 32px 64px;}
-.home-title{text-align:center;font-size:34px;font-weight:600;color:var(--pbi-text);line-height:1.2;margin-bottom:10px;letter-spacing:-.01em;}
-.home-sub{text-align:center;font-size:13px;color:var(--pbi-text2);line-height:1.7;margin-bottom:36px;}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:0 auto 44px;}
-@media (max-width:1024px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
-@media (max-width:600px){.stats-grid{grid-template-columns:1fr;}}
-.stat-cell{background:var(--pbi-surface);border:1px solid var(--pbi-border);border-radius:6px;padding:18px 12px;text-align:center;box-shadow:var(--pbi-shadow);transition:transform var(--transition-med);}
-.stat-cell:hover{transform:translateY(-3px);box-shadow:var(--pbi-shadow-md);}
-.stat-n{font-size:26px;font-weight:700;color:var(--pbi-text);line-height:1;}
-.stat-n.green{color:var(--pbi-green);}
-.stat-l{font-size:10px;color:var(--pbi-text3);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:6px;}
+.home-wrap{max-width:1280px;margin:0 auto;padding:48px 32px;}
+.home-title{text-align:center;font-size:34px;font-weight:600;margin-bottom:10px;}
+.home-sub{text-align:center;font-size:13px;color:var(--pbi-text2);margin-bottom:36px;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:44px;}
+.stat-cell{background:#fff;border:1px solid #e1dfdd;border-radius:6px;padding:18px;text-align:center;}
+.stat-n{font-size:26px;font-weight:700;color:var(--pbi-text);}
+.stat-l{font-size:10px;color:var(--pbi-text3);text-transform:uppercase;margin-top:6px;}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
-@media (max-width:768px){.cards-grid{grid-template-columns:1fr;}}
-.dcard{background:var(--pbi-surface);border:1px solid var(--pbi-border);border-radius:8px;padding:18px;cursor:pointer;transition:box-shadow var(--transition-med),transform var(--transition-med);box-shadow:var(--pbi-shadow);}
-.dcard:hover{box-shadow:var(--pbi-shadow-md);transform:translateY(-4px);}
-.dcard:focus{outline:2px solid var(--pbi-blue);outline-offset:2px;}
-.dcard-name{font-size:14px;font-weight:600;color:var(--pbi-text);margin-bottom:6px;}
+.dcard{background:#fff;border:1px solid #e1dfdd;border-radius:8px;padding:18px;cursor:pointer;transition:all var(--transition);}
+.dcard:hover{box-shadow:0 4px 10px rgba(0,0,0,.1);transform:translateY(-2px);}
+.dcard-name{font-size:14px;font-weight:600;margin-bottom:6px;}
 .dcard-desc{font-size:11px;color:var(--pbi-text3);line-height:1.5;margin-bottom:12px;}
-.dcard-footer{display:flex;align-items:center;justify-content:space-between;font-size:9px;border-top:1px solid var(--pbi-border);padding-top:10px;}
 
-/* DASHBOARD VIEW */
-#dashView{flex:1;display:none;position:relative;background:var(--pbi-bg);overflow:hidden;}
-#dashFrame{width:100%;height:100%;border:none;display:block;}
+/* DASHBOARD */
+#dashView{flex:1;display:none;background:var(--pbi-bg);}
+#dashFrame{width:100%;height:100%;border:none;}
 
 /* NOTIFICATIONS */
-#notifStack{position:fixed;bottom:16px;right:16px;z-index:3000;display:flex;flex-direction:column;gap:8px;max-width:400px;}
-.notif{background:var(--pbi-surface);border:1px solid var(--pbi-border);border-left:3px solid var(--pbi-yellow);border-radius:4px;padding:10px 14px;font-size:12px;color:var(--pbi-text);box-shadow:var(--pbi-shadow-md);animation:slideIn 0.3s ease;}
-.notif-info{border-left-color:var(--pbi-blue);}
+#notifStack{position:fixed;bottom:16px;right:16px;z-index:3000;}
+.notif{background:#fff;border-left:3px solid var(--pbi-yellow);border-radius:4px;padding:12px 16px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);animation:slideIn 0.3s ease;}
 .notif-success{border-left-color:var(--pbi-green);}
 .notif-error{border-left-color:var(--pbi-red);}
+@keyframes slideIn{from{transform:translateX(400px);opacity:0;}to{transform:translateX(0);opacity:1;}}
 
-/* DARK THEME */
-#mainApp{
-  --pbi-bg:#0a0f1e;
-  --pbi-surface:#121a2e;
-  --pbi-panel:#171f36;
-  --pbi-text:#e8ecf7;
-  --pbi-text2:#98a3c2;
-  --pbi-blue:#4f7cff;
-  display:flex!important;
-  flex-direction:column!important;
-  height:100vh;
-  background:var(--pbi-bg);
-}
-
-/* ANIMATIONS */
-@keyframes slideIn{
-  from{transform:translateX(400px);opacity:0;}
-  to{transform:translateX(0);opacity:1;}
-}
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
-}
-
-/* ACCESSIBILITY */
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;}
-}
-
-/* PRINT */
-@media print{
-  #loginScreen,#mainApp .topbar,#notifStack{display:none;}
-}
+#mainApp{--pbi-bg:#0a0f1e;--pbi-surface:#121a2e;--pbi-text:#e8ecf7;display:flex!important;height:100vh;background:var(--pbi-bg);}
 </style>
 </head>
 <body>
 
-<!-- SPLASH SCREEN -->
-<div id="splash" role="status" aria-label="Loading application">
+<!-- SPLASH -->
+<div id="splash">
   <div class="sp-center">
-    <div class="sp-ring-outer">
-      <div class="sp-avatar-frame">
-        <svg class="sp-avatar-img" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="50" cy="50" r="45" fill="#4f7cff"/>
-          <text x="50" y="65" font-size="50" font-weight="700" fill="#fff" text-anchor="middle">NX</text>
-        </svg>
-      </div>
-    </div>
-    <div class="sp-sys">Reporting app NEXUS</div>
-    <div class="sp-title">Data Analysis Platform</div>
-    <div class="sp-sub">Branch Reporting Suite</div>
-    <div class="sp-progress-wrap">
-      <div class="sp-progress-labels">
-        <span class="sp-progress-label">Loading</span>
-        <span class="sp-progress-val" id="sp-pct">0%</span>
-      </div>
-      <div class="sp-track"><div class="sp-fill" id="sbar" style="width:0%;" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>
-      <div class="sp-msg" id="smsg">Setting things up…</div>
-    </div>
+    <div class="sp-ring-outer">NX</div>
+    <div class="sp-title">NEXUS</div>
+    <div class="sp-sub">Data Intelligence Platform</div>
+    <div class="sp-track"><div class="sp-fill" id="sbar"></div></div>
   </div>
 </div>
 
-<!-- LOGIN SCREEN -->
-<div id="loginScreen" role="main" aria-label="Login page">
+<!-- QR MODAL -->
+<div id="qrModal" class="qr-modal-overlay">
+  <div class="qr-modal">
+    <h2 id="qrTitle">Account Registration</h2>
+    <p class="qr-modal-subtitle" id="qrSubtitle">Scan QR to register new account</p>
+    <div id="qrcode"></div>
+    <div class="qr-modal-footer">
+      <p id="qrLabel">📋 REGISTER ACCOUNT</p>
+      <p id="qrDesc">Scan QR code to create a new account</p>
+    </div>
+    <button class="qr-close-btn" onclick="closeQRModal()">Close</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="loginScreen">
   <div class="login-shell">
     <div class="login-left">
-      <div class="login-left-content">
-        <div class="login-brand">
-          <div class="login-brand-mark" aria-hidden="true"></div>
-          <div class="login-brand-text">Reporting app<b>NEXUS</b></div>
+      <h1 class="login-headline">Welcome back,<br>let's <span class="accent">get started!</span></h1>
+      <p class="login-sub">Sign in to NEXUS Dashboard</p>
+      <div class="login-features">
+        <div class="login-feature">
+          <div class="login-feature-icon">🔒</div>
+          <div><h3 class="login-feature-title">Secure & Protected</h3><p class="login-feature-desc">Enterprise-grade security</p></div>
         </div>
-        <h1 class="login-headline">Welcome back,<br>let's <span class="accent">get started!</span></h1>
-        <p class="login-sub">Sign in to continue to Reporting app NEXUS and access your dashboard.</p>
-        <div class="login-features">
-          <div class="login-feature">
-            <div class="login-feature-icon" aria-hidden="true">🔒</div>
-            <div>
-              <h3 class="login-feature-title">Secure & Protected</h3>
-              <p class="login-feature-desc">Enterprise-grade security keeps your data safe</p>
-            </div>
-          </div>
-          <div class="login-feature">
-            <div class="login-feature-icon" aria-hidden="true">📊</div>
-            <div>
-              <h3 class="login-feature-title">Real-time Reporting</h3>
-              <p class="login-feature-desc">Live insights for performance tracking</p>
-            </div>
-          </div>
-          <div class="login-feature">
-            <div class="login-feature-icon" aria-hidden="true">🌍</div>
-            <div>
-              <h3 class="login-feature-title">Seamless Access</h3>
-              <p class="login-feature-desc">Access from anywhere, anytime securely</p>
-            </div>
-          </div>
+        <div class="login-feature">
+          <div class="login-feature-icon">📊</div>
+          <div><h3 class="login-feature-title">Real-time Reporting</h3><p class="login-feature-desc">Live insights & analytics</p></div>
         </div>
       </div>
     </div>
     <div class="login-right">
       <div class="lcard">
-        <div class="lav-wrap">
-          <svg class="lav" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="50" cy="50" r="45" fill="#4f7cff"/>
-            <text x="50" y="65" font-size="50" font-weight="700" fill="#fff" text-anchor="middle">NX</text>
-          </svg>
-          <div class="lav-status"></div>
-        </div>
-        <h2 class="lname">Reporting app NEXUS</h2>
-        <p class="lrole">Worldlink · Branch Reporting</p>
+        <h2 class="lname">NEXUS Login</h2>
         <form id="loginForm" onsubmit="handleLogin(event)">
           <label class="lfield-label" for="userI">Username</label>
-          <div class="luwrap">
-            <input class="lu" type="text" id="userI" name="username" placeholder="Enter your username" autocomplete="username" required aria-required="true" minlength="3" pattern="[a-zA-Z0-9_-]+">
-          </div>
+          <input class="lu" type="text" id="userI" placeholder="Enter username" required minlength="3">
+          
           <label class="lfield-label" for="pwI">Password</label>
           <div class="liwrap">
-            <input class="li" type="password" id="pwI" name="password" placeholder="Enter your password" autocomplete="current-password" required aria-required="true" minlength="6">
-            <button class="eye" type="button" id="eyeB" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">👁</button>
+            <input class="li" type="password" id="pwI" placeholder="Enter password" required minlength="6">
+            <button class="eye" type="button" onclick="togglePassword()">👁</button>
           </div>
+          
           <div class="login-row">
-            <label class="login-remember"><input type="checkbox" id="rememberMe" name="remember"> Remember me</label>
-            <button type="button" class="login-forgot" onclick="showForgotPasswordModal()">Forgot password?</button>
+            <label class="login-remember"><input type="checkbox" id="rememberMe"> Remember me</label>
+            <button type="button" class="login-forgot">Forgot?</button>
           </div>
-          <button class="lbtn" type="submit" id="loginBtn">Sign in</button>
+          <button class="lbtn" type="submit">Sign in</button>
         </form>
-        <div class="lerr" id="lerr" role="alert" aria-live="polite">Invalid credentials</div>
-        <div class="login-or"><span>OR</span></div>
-        <button type="button" class="login-google" onclick="handleGoogleSignIn()">Sign in with Google</button>
-        <div class="lcard-foot">New to Reporting app NEXUS? <a onclick="showContactModal()" role="button" tabindex="0">Contact your administrator</a></div>
+        <div class="lerr" id="lerr"></div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);text-align:center;margin-top:10px;">
+          New user? <a onclick="showQRModal('New Account', 'Please scan QR code to register', 'register')" style="color:var(--pbi-yellow);cursor:pointer;text-decoration:underline;">Register here</a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="login-secure">🔒 Your session is secure and encrypted</div>
 </div>
 
 <!-- MAIN APP -->
-<div id="mainApp" role="main">
+<div id="mainApp">
   <div class="topbar">
     <div class="tb-logo">
       <div class="tb-logo-mark">NX</div>
-      <div><div class="tb-name">Reporting app NEXUS</div><div class="tb-ver">Branch Reporting</div></div>
+      <div><div class="tb-name">NEXUS</div></div>
     </div>
-    <nav class="tb-nav" role="navigation" aria-label="Main navigation">
-      <button class="np active" id="homeBtn" onclick="showHome()" aria-label="Home">Home</button>
-      <button class="np" id="wb-nav" onclick="openDash('winback')" aria-label="Winback Module">Winback</button>
-      <button class="np" id="isp-nav" onclick="openDash('isp')" aria-label="ISP Operations Module">ISP Ops</button>
-      <button class="np" id="renewal-nav" onclick="openDash('renewal')" aria-label="Renewal Winback Module">Renewal</button>
-      <button class="np" id="cfu-nav" onclick="openDash('cfu')" aria-label="CFU Follow-up Module">CFU</button>
-      <button class="np" id="art-nav" onclick="openDash('art')" aria-label="ART Visit Module">ART</button>
-      <button class="np" id="aop-nav" onclick="openDash('aop')" aria-label="AOP Dashboard">AOP</button>
-      <button class="np" id="tax-nav" onclick="openDash('tax')" aria-label="Tax Comparison">Tax</button>
+    <nav class="tb-nav">
+      <button class="np active" id="homeBtn" onclick="showHome()">Home</button>
+      <button class="np" id="wb-nav" onclick="openDash('winback')">Winback</button>
+      <button class="np" id="isp-nav" onclick="openDash('isp')">ISP</button>
+      <button class="np" id="renewal-nav" onclick="openDash('renewal')">Renewal</button>
+      <button class="np" id="cfu-nav" onclick="openDash('cfu')">CFU</button>
+      <button class="np" id="art-nav" onclick="openDash('art')">ART</button>
+      <button class="np" id="aop-nav" onclick="openDash('aop')">AOP</button>
+      <button class="np" id="tax-nav" onclick="openDash('tax')">Tax</button>
     </nav>
     <div class="tb-right">
-      <div class="tb-clock"><div class="tb-clock-time" id="cwTime">00:00:00</div></div>
-      <button class="ebtn" id="adminBtn" onclick="toggleAdminMode()" aria-label="Admin mode">🔒 Admin</button>
-      <button class="ebtn" id="editBtn" onclick="togglePanel()" aria-label="Edit data">Edit</button>
-      <button class="lout" onclick="handleLogout()" aria-label="Sign out">Sign out</button>
+      <button class="ebtn" onclick="alert('Admin mode')">Admin</button>
+      <button class="lout" onclick="handleLogout()">Sign out</button>
     </div>
   </div>
-  <div style="flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden;">
-    <div id="homeScreen" role="region" aria-label="Home screen">
+  <div style="flex:1;overflow:hidden;display:flex;">
+    <div id="homeScreen" style="flex:1;overflow-y:auto;">
       <div class="home-wrap">
         <h1 class="home-title">Dashboard</h1>
-        <p class="home-sub">Welcome to your analytics platform</p>
+        <p class="home-sub">Welcome to NEXUS Analytics</p>
         <div class="stats-grid">
-          <div class="stat-cell">
-            <div class="stat-n" id="s-totalrows">0</div>
-            <div class="stat-l">Total Records</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-n" id="s-saved">0</div>
-            <div class="stat-l">Datasets Cached</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-n" id="s-time">0m</div>
-            <div class="stat-l">Session Time</div>
-          </div>
-          <div class="stat-cell">
-            <div class="stat-n">07</div>
-            <div class="stat-l">Active Modules</div>
-          </div>
-        </div>
-        <div class="cards-grid" id="cardsContainer" role="region" aria-label="Available modules">
-          <!-- Dynamically populated -->
+          <div class="stat-cell"><div class="stat-n">0</div><div class="stat-l">Records</div></div>
+          <div class="stat-cell"><div class="stat-n">7</div><div class="stat-l">Modules</div></div>
+          <div class="stat-cell"><div class="stat-n">0m</div><div class="stat-l">Session</div></div>
+          <div class="stat-cell"><div class="stat-n">✓</div><div class="stat-l">Status</div></div>
         </div>
       </div>
     </div>
-    <div id="dashView" role="region" aria-label="Dashboard view" style="flex:1;display:none;overflow:hidden;">
-      <iframe id="dashFrame" title="Dashboard Module" sandbox="allow-scripts allow-same-origin allow-forms" style="width:100%;height:100%;border:none;"></iframe>
+    <div id="dashView" style="flex:1;">
+      <iframe id="dashFrame" title="Module"></iframe>
     </div>
   </div>
 </div>
 
-<div id="notifStack" role="region" aria-live="polite" aria-label="Notifications"></div>
+<div id="notifStack"></div>
 
 <script>
 'use strict';
 
-const appState = {
-  user: null,
-  authToken: null,
-  currentModule: null,
-  sessionTime: 0,
-  modules: {
-    winback: { name: 'Winback', status: 'STANDBY' },
-    isp: { name: 'ISP Ops', status: 'STANDBY' },
-    renewal: { name: 'Renewal', status: 'STANDBY' },
-    cfu: { name: 'CFU', status: 'STANDBY' },
-    art: { name: 'ART', status: 'STANDBY' },
-    aop: { name: 'AOP', status: 'STANDBY' },
-    tax: { name: 'Tax', status: 'READY' }
-  }
+// Demo accounts
+const demoUsers = {
+  'prem': { password: '123456', status: 'active' },
+  'admin': { password: 'admin123', status: 'active' },
+  'test': { password: 'test123', status: 'disabled' }
 };
 
-document.addEventListener('DOMContentLoaded', initApp);
+const appState = { user: null };
+
+// Payment URLs
+const PAYMENT_URL = 'upi://pay?pa=9843000000@eSewa&pn=NEXUS&tn=Account%20Payment&am=500';
+const REGISTER_URL = 'https://example.com/register';
 
 function initApp() {
-  console.log('Initializing NEXUS...');
-  const savedSession = sessionStorage.getItem('nexus_session');
-  if (savedSession) {
-    try {
-      appState.user = JSON.parse(savedSession);
-      showMainApp();
-    } catch (e) {
-      console.warn('Invalid session');
-      showLoginScreen();
-    }
+  const session = sessionStorage.getItem('nexus_session');
+  if (session) {
+    appState.user = JSON.parse(session);
+    showMainApp();
   } else {
     showLoginScreen();
   }
-  updateClock();
-  setInterval(updateClock, 1000);
-  updateSessionTime();
-  setInterval(updateSessionTime, 60000);
 }
 
 function handleLogin(e) {
   e.preventDefault();
   const username = document.getElementById('userI').value.trim();
   const password = document.getElementById('pwI').value;
-  const rememberMe = document.getElementById('rememberMe').checked;
+  const errDiv = document.getElementById('lerr');
   
-  if (!username || !password) {
-    showError('Please enter both username and password');
+  // Account does not exist
+  if (!demoUsers[username]) {
+    errDiv.textContent = '';
+    showQRModal('Account Not Found', 'No account found. Please register first.', 'register');
     return;
   }
   
-  showNotification('Authenticating...', 'info');
+  // Account is disabled
+  if (demoUsers[username].status === 'disabled') {
+    errDiv.textContent = '';
+    showQRModal('Account Locked', 'Your account is disabled. Please make payment to activate.', 'payment');
+    return;
+  }
   
-  setTimeout(() => {
-    if (username && password.length >= 6) {
-      appState.user = { username, email: `${username}@worldlink.com.np` };
-      appState.authToken = 'token_' + Date.now();
-      if (rememberMe) localStorage.setItem('nexus_user', username);
-      sessionStorage.setItem('nexus_session', JSON.stringify(appState.user));
-      showNotification('Welcome back, ' + username + '!', 'success');
-      showMainApp();
-    } else {
-      showError('Invalid credentials');
-    }
-  }, 500);
+  // Wrong password
+  if (demoUsers[username].password !== password) {
+    errDiv.textContent = 'Invalid password!';
+    errDiv.style.display = 'block';
+    return;
+  }
+  
+  // Login successful
+  appState.user = { username };
+  sessionStorage.setItem('nexus_session', JSON.stringify(appState.user));
+  showNotification('Welcome ' + username, 'success');
+  showMainApp();
+}
+
+function showQRModal(title, subtitle, type) {
+  const modal = document.getElementById('qrModal');
+  const qrcodeDiv = document.getElementById('qrcode');
+  
+  document.getElementById('qrTitle').textContent = title;
+  document.getElementById('qrSubtitle').textContent = subtitle;
+  
+  qrcodeDiv.innerHTML = '';
+  
+  let qrValue = type === 'payment' ? PAYMENT_URL : REGISTER_URL;
+  let label = type === 'payment' ? '💳 PAY FIRST HERE' : '📋 REGISTER ACCOUNT';
+  let desc = type === 'payment' ? 'Scan to activate your account' : 'Scan to create new account';
+  
+  document.getElementById('qrLabel').textContent = label;
+  document.getElementById('qrDesc').textContent = desc;
+  
+  new QRCode(qrcodeDiv, { text: qrValue, width: 280, height: 280, colorDark: '#000', colorLight: '#fff' });
+  modal.style.display = 'flex';
+}
+
+function closeQRModal() {
+  document.getElementById('qrModal').style.display = 'none';
+}
+
+function handleLogout() {
+  if (confirm('Sign out?')) {
+    sessionStorage.removeItem('nexus_session');
+    appState.user = null;
+    showLoginScreen();
+  }
 }
 
 function showLoginScreen() {
   document.getElementById('splash').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'block';
+  document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('mainApp').style.display = 'none';
 }
 
 function showMainApp() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('mainApp').style.display = 'flex';
-  document.getElementById('homeBtn').classList.add('active');
-  document.getElementById('homeScreen').style.display = 'block';
 }
 
 function showHome() {
-  document.querySelectorAll('.np').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.np').forEach(b => b.classList.remove('active'));
   document.getElementById('homeBtn').classList.add('active');
   document.getElementById('homeScreen').style.display = 'block';
   document.getElementById('dashView').style.display = 'none';
-  appState.currentModule = null;
 }
 
 function openDash(module) {
-  document.querySelectorAll('.np').forEach(btn => btn.classList.remove('active'));
-  const navBtn = document.getElementById(module + '-nav');
-  if (navBtn) navBtn.classList.add('active');
+  document.querySelectorAll('.np').forEach(b => b.classList.remove('active'));
+  document.getElementById(module + '-nav')?.classList.add('active');
   document.getElementById('homeScreen').style.display = 'none';
   document.getElementById('dashView').style.display = 'flex';
-  appState.currentModule = module;
-  document.getElementById('dashFrame').src = 'about:blank';
-  showNotification(`Loaded ${module} module`, 'info');
+  showNotification('Loaded ' + module, 'info');
 }
 
-function togglePasswordVisibility() {
-  const input = document.getElementById('pwI');
-  const isPassword = input.type === 'password';
-  input.type = isPassword ? 'text' : 'password';
-  document.getElementById('eyeB').textContent = isPassword ? '🙈' : '👁';
+function togglePassword() {
+  const inp = document.getElementById('pwI');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
 }
 
-function handleLogout() {
-  if (confirm('Are you sure you want to sign out?')) {
-    sessionStorage.removeItem('nexus_session');
-    localStorage.removeItem('nexus_user');
-    appState.user = null;
-    appState.authToken = null;
-    showLoginScreen();
-    showNotification('Signed out successfully', 'info');
-  }
-}
-
-function updateClock() {
-  const now = new Date();
-  document.getElementById('cwTime').textContent = now.toLocaleTimeString('en-US', { hour12: false });
-}
-
-function updateSessionTime() {
-  appState.sessionTime++;
-  document.getElementById('s-time').textContent = appState.sessionTime + 'm';
-}
-
-function showNotification(message, type = 'info') {
-  const notifStack = document.getElementById('notifStack');
+function showNotification(msg, type) {
   const notif = document.createElement('div');
-  notif.className = `notif notif-${type}`;
-  notif.setAttribute('role', 'status');
-  notif.setAttribute('aria-live', 'polite');
-  notif.textContent = message;
-  notifStack.appendChild(notif);
-  
-  setTimeout(() => {
-    notif.style.opacity = '0';
-    notif.style.transition = 'opacity 0.3s ease';
-    setTimeout(() => notif.remove(), 300);
-  }, 3000);
+  notif.className = 'notif notif-' + type;
+  notif.textContent = msg;
+  document.getElementById('notifStack').appendChild(notif);
+  setTimeout(() => notif.remove(), 3000);
 }
 
-function showError(message) {
-  document.getElementById('lerr').textContent = message;
-  document.getElementById('lerr').style.display = 'block';
-  setTimeout(() => {
-    document.getElementById('lerr').style.display = 'none';
-  }, 4000);
-}
-
-function toggleAdminMode() {
-  showNotification('Admin mode toggled', 'info');
-}
-
-function togglePanel() {
-  showNotification('Edit panel opened', 'info');
-}
-
-function showForgotPasswordModal() {
-  showNotification('Password reset link sent to email', 'success');
-}
-
-function showContactModal() {
-  showNotification('Contact support@worldlink.com.np', 'info');
-}
-
-function handleGoogleSignIn() {
-  showNotification('Google Sign-In not configured', 'error');
-}
-
-window.addEventListener('error', (e) => {
-  console.error('Global error:', e);
-  showNotification('An error occurred', 'error');
+document.getElementById('qrModal').addEventListener('click', (e) => {
+  if (e.target.id === 'qrModal') closeQRModal();
 });
+
+document.addEventListener('DOMContentLoaded', initApp);
 </script>
 </body>
 </html>
