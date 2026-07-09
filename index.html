@@ -2185,7 +2185,7 @@ window.addEventListener('message',function(e){
   };
   window.cloudSyncDownload = async function(){
     var url = csGetUrl();
-    if(!url){ alert('Pahile Apps Script URL halnus.'); return; }
+    if(!url){ alert('https://script.google.com/macros/s/AKfycbzaArpai_HfuFZhUAUXLwOyn6F2sxFGsJD2pXRAVRaZtJL9k4GhdhM8TofUUjJVIeyqfg/exec.'); return; }
     localStorage.setItem('Worldlink_cloud_sync_url', url);
     if(!confirm('Cloud bata data download garda, yo browser ko current local data overwrite huncha. Continue garne?')) return;
     var status = document.getElementById('cloudSyncStatus');
